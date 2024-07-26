@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { View, ScrollView, TextInput, TouchableOpacity, StyleSheet, Text, KeyboardAvoidingView, Platform } from 'react-native';
 import ChatBubble from '../components/ChatBubble';
+import LoadingIndicator from '../components/LoadingIndicator';
 import Header from '../components/Header';
 import { getAIResponse } from '../services/AIService';
 import { saveMessages, loadMessages } from '../utils/storage';
@@ -12,6 +13,7 @@ const ChatScreen = () => {
   
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const scrollViewRef = useRef();
 
   useEffect(() => {
@@ -26,11 +28,12 @@ const ChatScreen = () => {
     if (input.trim()) {
       const userMessage = {
         role: 'user',
-        content: `${userName}: ${input.trim()}`,
+        content: `${input.trim()}`,
         timestamp: new Date().toLocaleTimeString(),
       };
       setMessages(prevMessages => [...prevMessages, userMessage]);
       setInput('');
+      setIsLoading(true);
 
       try {
         const aiResponse = await getAIResponse(input.trim());
@@ -43,6 +46,8 @@ const ChatScreen = () => {
       } catch (error) {
         console.error('Error getting AI response:', error);
         // Handle error (e.g., show an error message to the user)
+      } finally {
+        setIsLoading(false);
       }
     }
   }, [input, userName]);
@@ -62,6 +67,11 @@ const ChatScreen = () => {
         {messages.map((message, index) => (
           <ChatBubble key={index} message={message} isUser={message.role === 'user'} />
         ))}
+        {isLoading && (
+          <View style={styles.loadingContainer}>
+            <LoadingIndicator />
+          </View>
+        )}
       </ScrollView>
       <View style={styles.inputContainer}>
         <TextInput
@@ -73,8 +83,9 @@ const ChatScreen = () => {
           keyboardType="default"
           returnKeyType="send"
           enablesReturnKeyAutomatically={true}
+          editable={!isLoading}
         />
-        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+        <TouchableOpacity style={styles.sendButton} onPress={sendMessage} disabled={isLoading}>
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>
       </View>
@@ -118,6 +129,10 @@ const styles = StyleSheet.create({
   sendButtonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  loadingContainer: {
+    alignItems: 'flex-start',
+    marginVertical: 5,
   },
 });
 

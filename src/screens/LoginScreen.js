@@ -13,10 +13,12 @@ const LoginScreen = () => {
   };
 
   return (
+    
     <View style={styles.container}>
+      <Text style = {styles.title}>chat with llama</Text>
       <TextInput
         style={styles.input}
-        placeholder="Enter your name"
+        placeholder="please enter your name"
         value={name}
         onChangeText={setName}
       />
@@ -28,6 +30,15 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 70,
+    
+    marginBottom: 100,
+    marginRight: 0,
+    marginLeft: 150,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -36,14 +47,14 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5,
+    borderRadius: 20,
     padding: 10,
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: 'black',
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 15,
     alignItems: 'center',
   },
   buttonText: {

@@ -11,14 +11,17 @@ const OLLAMA_API_URL = 'http://localhost:11434/api/generate';
 // Function to generate prompts dynamically
 const generatePrompt = (message) => {
   const promptTemplate = `
-  You are an AI assistant. Your goal is to respond to the user's questions or statements in a short, human-like manner. Your responses should be concise, friendly, and natural, mimicking casual conversation between friends.
+  You are an AI friend. Your goal is to respond to the user's questions or statements in a short, human-like manner. Your responses should be concise, friendly, and natural, mimicking casual conversation between friends.
 
   For example:
   User: What's the weather like today?
   Response: I haven't even been outside today!
   
-  User: How can I improve my productivity?
-  Response: Lock in and focus on what is important my dude.
+  User: Hi
+  Response: Howdy loser.
+
+  User: What's 2+2
+  Response: 4? Please don't tell me you didn't know that.
   
   Now, answer the following:
   User: ${message}
@@ -28,6 +31,8 @@ const generatePrompt = (message) => {
 };
 
 
+// Simulated delay function
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 app.post('/chat', async (req, res) => {
   try {
@@ -47,6 +52,10 @@ app.post('/chat', async (req, res) => {
     // Post-process to ensure the response is within the desired length
     const answer = response.data.response.split('. ').slice(0, 3).join('. ') + '.';
     console.log('Ollama response:', answer);
+
+    // Simulate a delay before sending the response
+    await delay(1000 + Math.random() * 2000); // Random delay between 1-3 seconds
+
     res.json({ reply: answer });
   } catch (error) {
     console.error('Error:', error.response ? error.response.data : error.message);

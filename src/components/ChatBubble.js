@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
   },
   userBubble: {
     backgroundColor: '#1F8AFF',
+   
     
   },
   assistantBubble: {
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
   },
   userText: {
     color: '#FFFFFF',
+    
   },
   assistantText: {
     color: '#000000',
