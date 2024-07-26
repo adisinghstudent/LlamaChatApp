@@ -70,6 +70,9 @@ const ChatScreen = () => {
           onChangeText={setInput}
           placeholder="Type your message..."
           onSubmitEditing={sendMessage}
+          keyboardType="default"
+          returnKeyType="send"
+          enablesReturnKeyAutomatically={true}
         />
         <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
           <Text style={styles.sendButtonText}>Send</Text>
