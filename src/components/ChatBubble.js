@@ -3,8 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const ChatBubble = ({ message, isUser }) => (
   <View style={[styles.bubble, isUser ? styles.userBubble : styles.assistantBubble]}>
-    <Text style={styles.messageText}>{message.content}</Text>
-    <Text style={styles.timestamp}>{message.timestamp}</Text>
+    <Text style={[styles.messageText, isUser ? styles.userText : styles.assistantText]}>
+      {message.content}
+    </Text>
   </View>
 );
 
@@ -21,11 +22,15 @@ const styles = StyleSheet.create({
   },
   assistantBubble: {
     alignSelf: 'flex-start',
-    backgroundColor: '#808080',
+    backgroundColor: '#F1F1F1',
   },
-  messageText: {
+  userText: {
     fontSize: 16,
     color: '#FFFFFF',
+  },
+  assistantText: {
+    fontSize: 16,
+    color: '#000000', // Changed to black for contrast
   },
   timestamp: {
     fontSize: 10,

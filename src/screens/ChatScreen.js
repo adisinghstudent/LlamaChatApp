@@ -4,8 +4,12 @@ import ChatBubble from '../components/ChatBubble';
 import Header from '../components/Header';
 import { getAIResponse } from '../services/AIService';
 import { saveMessages, loadMessages } from '../utils/storage';
+import { useRoute } from '@react-navigation/native';
 
 const ChatScreen = () => {
+  const route = useRoute();
+  const { userName } = route.params || { userName: 'User' };
+  
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const scrollViewRef = useRef();
@@ -22,7 +26,7 @@ const ChatScreen = () => {
     if (input.trim()) {
       const userMessage = {
         role: 'user',
-        content: input.trim(),
+        content: `${userName}: ${input.trim()}`,
         timestamp: new Date().toLocaleTimeString(),
       };
       setMessages(prevMessages => [...prevMessages, userMessage]);
@@ -41,7 +45,7 @@ const ChatScreen = () => {
         // Handle error (e.g., show an error message to the user)
       }
     }
-  }, [input]);
+  }, [input, userName]);
 
   return (
     <KeyboardAvoidingView 
@@ -98,13 +102,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     marginRight: 10,
+    marginBottom: 0,
   },
   sendButton: {
     backgroundColor: '#1F8AFF',
-    borderRadius: 20,
+    borderRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 10,
     justifyContent: 'center',
+    marginBottom: 10,
   },
   sendButtonText: {
     color: 'white',

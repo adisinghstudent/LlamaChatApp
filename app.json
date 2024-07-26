@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "LlamaChatApp",
-    "slug": "LlamaChatApp",
+    "slug": "llamachatapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,6 +22,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0f284ead-2742-4019-993d-ee1a7e05f19f"
+      }
+    },
+    "owner": "adisinghstudent"
   }
 }
