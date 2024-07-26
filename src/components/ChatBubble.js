@@ -10,26 +10,27 @@ const ChatBubble = ({ message, isUser }) => (
 
 const styles = StyleSheet.create({
   bubble: {
-    padding: 10,
+    padding: 6,
     borderRadius: 15,
     marginVertical: 5,
-    maxWidth: '70%',
+    maxWidth: '65%',
   },
   userBubble: {
     alignSelf: 'flex-end',
-    backgroundColor: '#DCF8C6',
+    backgroundColor: '#1F8AFF',
   },
   assistantBubble: {
     alignSelf: 'flex-start',
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#808080',
   },
   messageText: {
     fontSize: 16,
+    color: '#FFFFFF',
   },
   timestamp: {
-    fontSize: 12,
-    color: '#888',
-    marginTop: 5,
+    fontSize: 10,
+    color: '#FFFFFF',
+    marginTop: 2,
   },
 });
 

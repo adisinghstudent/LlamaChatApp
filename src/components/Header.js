@@ -3,19 +3,25 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Header = () => (
   <View style={styles.header}>
-    <Text style={styles.headerTitle}>Llama📱</Text>
+    <Text style={styles.Logo}>📱</Text>
+    <Text style={styles.headerTitle}>Llama3.2</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
+    backgroundColor: '#1F8AFF',
+    padding: 40,
     alignItems: 'center',
+  },
+  Logo: {
+    padding: 10,
+    
   },
   headerTitle: {
     color: 'white',
-    fontSize: 20,
+    padding:0,
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
